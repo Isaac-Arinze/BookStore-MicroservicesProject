@@ -3,14 +3,19 @@ name: Catalog Service
 on:
   push:
     paths:
-      - 'catalog-service/**'
+      - catalog-service/**
     branches:
-      - '**'
+      - 'main'
 
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    env:
+      working_directory: ./catalog-service
+    defaults:
+      run:
+        working-directory: ${{ env.working_directory }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -22,8 +27,5 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Ensure Maven Wrapper Executability
-        run: chmod +x ./catalog-service/mvnw
-
       - name: Build with Maven
-        run: ./catalog-service/mvnw -ntp verify
+        run: ./mvnw -ntp verify

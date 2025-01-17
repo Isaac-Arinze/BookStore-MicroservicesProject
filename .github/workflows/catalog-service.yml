@@ -6,7 +6,6 @@ on:
       - catalog-service/**
     branches:
       - '**'
-
 jobs:
   build:
     name: Build

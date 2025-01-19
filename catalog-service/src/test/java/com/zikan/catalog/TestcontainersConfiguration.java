@@ -1,4 +1,4 @@
-package com.zikan.BookStore;
+package com.zikan.catalog;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;

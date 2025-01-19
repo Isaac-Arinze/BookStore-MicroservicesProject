@@ -1,4 +1,3 @@
 package com.zikan.BookStore;
 
-public class ContainersConfig {
-}
+public class ContainersConfig {}

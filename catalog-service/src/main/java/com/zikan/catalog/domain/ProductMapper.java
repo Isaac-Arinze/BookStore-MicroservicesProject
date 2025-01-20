@@ -1,6 +1,6 @@
 package com.zikan.catalog.domain;
 
- class ProductMapper {
+class ProductMapper {
 
     static Product toProduct(ProductEntity productEntity) {
         return new Product(

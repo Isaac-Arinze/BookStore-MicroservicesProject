@@ -2,6 +2,7 @@ package com.zikan.catalog.domain;
 
 import com.zikan.catalog.web.controllers.ApplicationProperties;
 import jakarta.transaction.Transactional;
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,11 +17,10 @@ public class ProductService {
 
     private final ApplicationProperties properties;
 
-
-     ProductService(ProductRepository productRepository, ApplicationProperties properties) {
+    ProductService(ProductRepository productRepository, ApplicationProperties properties) {
         this.productRepository = productRepository;
-         this.properties = properties;
-     }
+        this.properties = properties;
+    }
 
     public PagedResult<Product> getProducts(int pageNo) {
         Sort sort = Sort.by("name").ascending();
@@ -41,5 +41,9 @@ public class ProductService {
                 productsPage.hasNext(),
                 productsPage.hasPrevious());
         //        return pagedResult;
+    }
+
+    public Optional<Product> getProductsByCode(String code) {
+        return productRepository.findByCode(code).map(ProductMapper::toProduct);
     }
 }

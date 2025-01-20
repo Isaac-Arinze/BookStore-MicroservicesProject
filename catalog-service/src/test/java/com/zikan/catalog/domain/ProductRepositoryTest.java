@@ -37,9 +37,9 @@ class ProductRepositoryTest {
         assertThat(product.getDescription()).isEqualTo("Winning will make you famous. Losing means certain death...");
         assertThat(product.getPrice()).isEqualTo(new BigDecimal("34.0"));
     }
+
     @Test
-    void shouldReturnEmptyWhenProductCodeNotExists(){
+    void shouldReturnEmptyWhenProductCodeNotExists() {
         assertThat(productRepository.findByCode("invalid_product_code").isEmpty());
     }
-
 }

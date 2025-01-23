@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="order-service" />
       </profile>
       <profile name="Annotation profile for spring-boot-microservices-course" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -15,7 +16,6 @@
           <entry name="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-configuration-processor/unknown/spring-boot-configuration-processor-unknown.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-configuration-processor/unknown/spring-boot-configuration-processor-unknown.jar" />
         </processorPath>
-        <module name="BookStore" />
         <module name="catalog-service" />
       </profile>
     </annotationProcessing>
@@ -27,6 +27,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="BookStore" options="-parameters" />
       <module name="catalog-service" options="-parameters" />
+      <module name="order-service" options="-parameters" />
     </option>
   </component>
 </project>

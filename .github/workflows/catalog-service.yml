@@ -44,4 +44,4 @@ jobs:
       - name: Build and Publish Docker Image
         run: |
           ./mvnw spring-boot:build-image -DskipTests
-          docker push ${{ env.DOCKER_IMAGE_NAME }}/bookstore-catalog-service
+          docker push ${{ env.DOCKER_IMAGE_NAME }}

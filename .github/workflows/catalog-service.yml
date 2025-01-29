@@ -35,16 +35,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and Publish Docker Image
-        run: |
-          ./mvnw spring-boot:build-image -DskipTests
-          echo "Pushing the image $DOCKER_IMAGE_NAME to Docker Hub..."
-          docker push $DOCKER_IMAGE_NAME
+#      - name: Build and Publish Docker Image
+#        run: |
+#          ./mvnw spring-boot:build-image -DskipTests
+#          echo "Pushing the image $DOCKER_IMAGE_NAME to Docker Hub..."
+#          docker push $DOCKER_IMAGE_NAME
 
-#      - name: Build and Push Docker Image
-#        uses: docker/build-push-action@v5
-#        with:
-#          context: .
-#          file: ./Dockerfile
-#          push: true
-#          tags: ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest

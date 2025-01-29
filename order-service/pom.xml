@@ -201,7 +201,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<image>
-						<name>${DOCKER_IMAGE_NAME}</name>
+						<name>${dockerImageName}</name>
 					</image>
 				</configuration>
 				<executions>

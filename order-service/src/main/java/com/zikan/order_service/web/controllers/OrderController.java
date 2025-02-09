@@ -27,6 +27,7 @@ public class OrderController {
     @PostMapping
     @ResponseStatus (HttpStatus.CREATED)
     CreateOrderResponse createOrder (@Valid @RequestBody CreateOrderRequest request){
+        System.out.println("request " + request);
         String userName = securityService.getLoginUserName();
         log.info("Creating order for user: {}", userName);
         return orderService.createOrder(userName, request);

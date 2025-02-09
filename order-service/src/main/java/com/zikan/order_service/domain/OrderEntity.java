@@ -14,7 +14,7 @@ import java.util.Set;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_id_generator")
-    @SequenceGenerator(name = "ordee_id_generator", sequenceName = "order_id_seq")
+    @SequenceGenerator(name = "order_id_generator", sequenceName = "order_id_seq")
     private Long id;
 
 

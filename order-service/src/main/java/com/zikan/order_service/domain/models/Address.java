@@ -15,6 +15,9 @@ public record Address(
         @NotBlank(message = "ZipCode is required")
         String zipCode,
 
+        @NotBlank(message = "State is required")  // Add this field
+        String state,
+
         @NotBlank(message = "Country is required")
         String country
 ) {

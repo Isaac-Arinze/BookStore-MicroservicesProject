@@ -13,6 +13,6 @@ public record OrderItem(
                 (message = "Name is required") String name,
         @NotNull
                 (message = "Price is required") BigDecimal price,
-        @NotNull
-                (message = "Quantity is required") @Min(value = 1, message = "Min quantity must be 1")
+       @NotNull
+               (message = "Quantity is required") @Min(value = 1, message = "Min quantity must be 1")
         Integer quantity){}

@@ -22,7 +22,7 @@ public class RabbitMQDemoController {
     @PostMapping("/send")
     public void sendMessage (@RequestBody MyMessage message){
         rabbitTemplate.convertAndSend(
-                properties.getOrderEventExchange(),
+                properties.orderEventExchange(),
                 message.routingKey(),
                 message.payload());
 

@@ -20,48 +20,48 @@ public class RabbitMQConfig {
 
     @Bean
     DirectExchange directExchange() {
-        return new DirectExchange(properties.getNewOrdersQueue());
+        return new DirectExchange(properties.newOrdersQueue());
     }
 
     @Bean
     Queue newOrdersQueue() {
-        return QueueBuilder.durable(properties.getNewOrdersQueue()).build();
+        return QueueBuilder.durable(properties.newOrdersQueue()).build();
     }
 
     @Bean
     Binding newOrderQueueBinding() {
         return BindingBuilder.bind(newOrdersQueue())
                 .to(directExchange())
-                .with(properties.getNewOrdersQueue());
+                .with(properties.newOrdersQueue());
     }
 
     @Bean
     Queue deliveredOrdersQueue() {
-        return QueueBuilder.durable(properties.getDeliveredOrdersQueue()).build();
+        return QueueBuilder.durable(properties.deliveredOrdersQueue()).build();
     }
 
     @Bean
     Binding deliveredOrdersQueueBinding() {
         return BindingBuilder.bind(deliveredOrdersQueue())
                 .to(directExchange())
-                .with(properties.getDeliveredOrdersQueue());
+                .with(properties.deliveredOrdersQueue());
     }
 
     @Bean
     Queue cancelledOrdersQueue() {
-        return QueueBuilder.durable(properties.getCancelledOrdersQueue()).build();
+        return QueueBuilder.durable(properties.cancelledOrdersQueue()).build();
     }
 
     @Bean
     Binding cancelledOrdersQueueBinding() {
         return BindingBuilder.bind(cancelledOrdersQueue())
                 .to(directExchange())
-                .with(properties.getCancelledOrdersQueue());
+                .with(properties.cancelledOrdersQueue());
     }
 
     @Bean
     Queue errorOrdersQueue() {
-        return QueueBuilder.durable(properties.getErrorOrdersQueue()).build();
+        return QueueBuilder.durable(properties.errorOrdersQueue()).build();
     }
 
     @Bean

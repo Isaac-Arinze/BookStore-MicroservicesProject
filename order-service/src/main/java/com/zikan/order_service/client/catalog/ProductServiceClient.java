@@ -1,5 +1,6 @@
 package com.zikan.order_service.client.catalog;
 
+import io.github.resilience4j.retry.annotation.Retry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -20,20 +21,23 @@ public class ProductServiceClient {
         this.restClient = restClient;
     }
 
+
+    @Retry(name = "catalog-service")
     public Optional<Product> getProductByCode (String code) {
         log.info("Fetching product for code {} ", code);
 
-        try {
+//        try {
             var product = restClient
                     .get()
                     .uri("/api/v1/products/{code}", code)
                     .retrieve()
                     .body(Product.class);
             return Optional.ofNullable(product);
-        }catch (Exception e){
-            log.error("Error Fetching product for code {} ", code, e);
-            return Optional.empty();
-        }
+//        }
+//        catch (Exception e){
+//            log.error("Error Fetching product for code {} ", code, e);
+//            return Optional.empty();
+//        }
 
     }
 

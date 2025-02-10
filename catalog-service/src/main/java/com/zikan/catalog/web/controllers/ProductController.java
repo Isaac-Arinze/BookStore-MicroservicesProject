@@ -24,9 +24,18 @@ class ProductController {
 
     @GetMapping("{code}")
     ResponseEntity<Product> getProductByCode(@PathVariable String code) {
+        sleep();
         return productService
                 .getProductsByCode(code)
                 .map(ResponseEntity::ok)
                 .orElseThrow(() -> ProductNotFoundException.forCode(code));
+    }
+
+    void sleep(){
+        try{
+            Thread.sleep(3000);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
     }
 }

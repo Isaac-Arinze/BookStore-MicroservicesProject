@@ -35,18 +35,6 @@ public class ProductServiceClient {
             return Optional.empty();
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
+
 }

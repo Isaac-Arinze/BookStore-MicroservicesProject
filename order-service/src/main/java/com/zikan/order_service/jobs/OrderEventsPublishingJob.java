@@ -20,6 +20,7 @@ public class OrderEventsPublishingJob {
     }
 
     @Scheduled(cron = "${orders.publish-order-events-job-cron}")
+//    @SchedulerLock (name = "publishOrderEvents")
     public void publishOrderEvents() {
         log.info("Publishing order events at {}", Instant.now());
         orderEventService.publishOrderEvents();

@@ -159,10 +159,24 @@
 			<artifactId>postgresql</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.wiremock</groupId>
+			<artifactId>wiremock-standalone</artifactId>
+			<version>3.5.2</version>
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.wiremock.integrations.testcontainers</groupId>
 			<artifactId>wiremock-testcontainers-module</artifactId>
 			<version>${wiremock-testcontainers.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.tomakehurst</groupId>
+			<artifactId>wiremock-jre8</artifactId>
+			<version>2.35.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

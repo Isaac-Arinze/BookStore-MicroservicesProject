@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.math.BigDecimal;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.notNullValue;
 
@@ -18,8 +20,11 @@ class OrderControllerTests extends AbstractIT {
     @Nested
     class CreateOrderTests {
 
+
+
         @Test
         void shouldCreateOrderSuccessfully() {
+            mockGetProductByCode("P100", "Product 1", new BigDecimal("25.50"));
 
             var payload =
                     """ 
@@ -28,7 +33,7 @@ class OrderControllerTests extends AbstractIT {
                                     "name": "Siva",
                                     "email": "siva@gmail.com",
                                     "phone": "999999999"
-                               },
+                               },   
                          
                                "deliveryAddress": {
                                        "addressLine1": "HNO 123",

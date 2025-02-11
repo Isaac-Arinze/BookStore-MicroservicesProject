@@ -1,5 +1,6 @@
 package com.zikan.order_service.client.catalog;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,8 @@ public class ProductServiceClient {
     }
 
 
-    @Retry(name = "catalog-service")
+    @CircuitBreaker(name = "catalog-service")
+    @Retry(name = "catalog-service", fallbackMethod =  "getProductByCodeFallback" )
     public Optional<Product> getProductByCode (String code) {
         log.info("Fetching product for code {} ", code);
 
@@ -41,4 +43,8 @@ public class ProductServiceClient {
 
     }
 
+    Optional<Product> getProductByCodeFallback (String code, Throwable t) {
+        System.out.println("ProductServiceClient.getProductByCodeFallback: code: " + code);
+        return Optional.empty();
+    }
 }

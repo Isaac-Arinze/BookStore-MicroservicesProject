@@ -1,6 +1,7 @@
 package com.zikan.order_service.domain;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zikan.order_service.domain.models.OrderCreatedEvent;
 import com.zikan.order_service.domain.models.OrderEventType;
@@ -31,13 +32,12 @@ public class OrderEventService {
         this.objectMapper = objectMapper;
     }
 
-    void save (OrderCreatedEvent event){
+    void save(OrderCreatedEvent event){
 
         OrderEventEntity orderEvent = new OrderEventEntity();
-
         orderEvent.setEventId(event.eventId());
         orderEvent.setOrderNumber(event.orderNumber());
-        orderEvent.setEventType(OrderEventType.ORDER_DELIVERED);
+        orderEvent.setEventType(OrderEventType.ORDER_CREATED);
         orderEvent.setCreatedAt(event.createdAt());
         orderEvent.setPayload(toJsonPayload(event));
         this.orderEventRepository.save(orderEvent);
@@ -49,11 +49,42 @@ public class OrderEventService {
         List<OrderEventEntity> events = orderEventRepository.findAll(sort);
         log.info("Found {} order events to be published", events.size());
         for (OrderEventEntity event : events) {
-            this.publishOrderEvents();
+            this.publishEvent(event);
             orderEventRepository.delete(event);
         }
     }
 
+    private void publishEvent (OrderEventEntity event){
+
+        OrderEventType eventType = event.getEventType();
+
+        switch (eventType) {
+            case ORDER_CREATED:
+                OrderCreatedEvent orderCreatedEvent = fromJsonPayload(event.getPayload(), OrderCreatedEvent.class);
+                orderEventPublisher.publish(orderCreatedEvent);
+                break;
+            default:
+                log.warn("Unsupported OrderEventType: {}", eventType);
+
+        }
+
+    }
+
+    public String toJsonPayload (Object object){
+        try{
+            return objectMapper.writeValueAsString(object);
+
+        }catch (JsonProcessingException e){
+            throw new RuntimeException(e);
+        }
+    }
+    private <T> T fromJsonPayload(String json, Class<T> type) {
+        try {
+            return objectMapper.readValue(json, type);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 

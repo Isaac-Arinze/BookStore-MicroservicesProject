@@ -1,9 +1,6 @@
 package com.zikan.order_service.domain;
 
-import com.zikan.order_service.domain.models.CreateOrderRequest;
-import com.zikan.order_service.domain.models.CreateOrderResponse;
-import com.zikan.order_service.domain.models.OrderCreatedEvent;
-import com.zikan.order_service.domain.models.OrderStatus;
+import com.zikan.order_service.domain.models.*;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +43,14 @@ public class OrderService {
         for (OrderEntity order : orders) {
             this.process(order);
         }
+    }
+
+    public List<OrderSummary> findOrders(String userName){
+        List<OrderEntity> orders = orderRepository.findByUserName(userName);
+        return orders.stream()
+                .map(order -> new OrderSummary(order.getOrderNumber(), order.getStatus()))
+                .toList();
+
     }
 
     private void process(OrderEntity order) {

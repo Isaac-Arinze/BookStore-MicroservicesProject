@@ -17,4 +17,6 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
         order.setStatus(status);
         this.save(order);
     }
+
+    List<OrderEntity> findByUserName(String usetName);
 }

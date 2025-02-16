@@ -46,10 +46,13 @@ public class OrderService {
     }
 
     public List<OrderSummary> findOrders(String userName){
-        List<OrderEntity> orders = orderRepository.findByUserName(userName);
-        return orders.stream()
-                .map(order -> new OrderSummary(order.getOrderNumber(), order.getStatus()))
-                .toList();
+        return  orderRepository.findByUserName(userName);
+
+
+
+//        return orders.stream()
+//                .map(order -> new OrderSummary(order.getOrderNumber(), order.getStatus()))
+//                .toList();
 
     }
 

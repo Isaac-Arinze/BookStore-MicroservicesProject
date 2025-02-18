@@ -11,5 +11,3 @@ public record OrderCancelledEvent(
         Address deliveryAddress,
         String reason,
         LocalDateTime createdAt) {}
-
-

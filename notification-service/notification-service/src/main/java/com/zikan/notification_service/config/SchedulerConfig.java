@@ -1,4 +1,4 @@
-package com.zikan.order_service.config;
+package com.zikan.notification_service.config;
 
 import javax.sql.DataSource;
 import net.javacrumbs.shedlock.core.LockProvider;

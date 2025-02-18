@@ -1,16 +1,14 @@
 package com.zikan.order_service.domain;
 
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zikan.order_service.domain.models.*;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional
@@ -24,8 +22,10 @@ public class OrderEventService {
 
     private final ObjectMapper objectMapper;
 
-
-    public OrderEventService(OrderEventRepository orderEventRepository, OrderEventPublisher orderEventPublisher, ObjectMapper objectMapper) {
+    public OrderEventService(
+            OrderEventRepository orderEventRepository,
+            OrderEventPublisher orderEventPublisher,
+            ObjectMapper objectMapper) {
         this.orderEventRepository = orderEventRepository;
         this.orderEventPublisher = orderEventPublisher;
         this.objectMapper = objectMapper;
@@ -71,8 +71,8 @@ public class OrderEventService {
         this.orderEventRepository.save(orderEvent);
     }
 
-    public void publishOrderEvents(){
-        Sort sort = Sort.by( "createdAt").ascending();
+    public void publishOrderEvents() {
+        Sort sort = Sort.by("createdAt").ascending();
 
         List<OrderEventEntity> events = orderEventRepository.findAll(sort);
         log.info("Found {} order events to be published", events.size());
@@ -108,14 +108,15 @@ public class OrderEventService {
         }
     }
 
-    public String toJsonPayload (Object object){
-        try{
+    public String toJsonPayload(Object object) {
+        try {
             return objectMapper.writeValueAsString(object);
 
-        }catch (JsonProcessingException e){
+        } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
     }
+
     private <T> T fromJsonPayload(String json, Class<T> type) {
         try {
             return objectMapper.readValue(json, type);
@@ -123,22 +124,4 @@ public class OrderEventService {
             throw new RuntimeException(e);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

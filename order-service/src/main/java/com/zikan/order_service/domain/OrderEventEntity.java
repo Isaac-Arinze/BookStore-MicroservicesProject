@@ -2,15 +2,14 @@ package com.zikan.order_service.domain;
 
 import com.zikan.order_service.domain.models.OrderEventType;
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 
 @Entity
-@Table (name = "order_events")
- class OrderEventEntity {
+@Table(name = "order_events")
+class OrderEventEntity {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "order_event_id_generator")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_event_id_generator")
     @SequenceGenerator(name = "order_event_id_generator", sequenceName = "order_event_id_seq")
     private Long id;
 
@@ -23,10 +22,10 @@ import java.time.LocalDateTime;
     @Enumerated(EnumType.STRING)
     private OrderEventType eventType;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String payload;
 
-    @Column (name ="created_at", nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(name = "updated_at")

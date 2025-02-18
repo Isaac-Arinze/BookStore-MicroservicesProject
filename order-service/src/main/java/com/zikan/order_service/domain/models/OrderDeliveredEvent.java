@@ -10,5 +10,3 @@ public record OrderDeliveredEvent(
         Customer customer,
         Address deliveryAddress,
         LocalDateTime createdAt) {}
-
-

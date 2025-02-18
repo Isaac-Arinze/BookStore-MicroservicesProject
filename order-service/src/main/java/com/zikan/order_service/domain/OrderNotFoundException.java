@@ -1,13 +1,12 @@
 package com.zikan.order_service.domain;
 
-public class OrderNotFoundException extends RuntimeException{
+public class OrderNotFoundException extends RuntimeException {
 
-    public OrderNotFoundException (String message){
+    public OrderNotFoundException(String message) {
         super(message);
     }
 
-    public static OrderNotFoundException forOrderNumber (int orderNumber){
+    public static OrderNotFoundException forOrderNumber(int orderNumber) {
         return new OrderNotFoundException("Order number " + orderNumber + " not found");
-
     }
 }

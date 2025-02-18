@@ -1,4 +1,4 @@
-package com.zikan.order_service.config;
+package com.zikan.notification_service.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zikan.order_service.ApplicationProperties;

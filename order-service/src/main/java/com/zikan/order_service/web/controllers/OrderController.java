@@ -4,13 +4,11 @@ import com.zikan.order_service.domain.OrderNotFoundException;
 import com.zikan.order_service.domain.OrderService;
 import com.zikan.order_service.domain.models.*;
 import jakarta.validation.Valid;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -26,9 +24,10 @@ public class OrderController {
         this.orderService = orderService;
         this.securityService = securityService;
     }
+
     @PostMapping
-    @ResponseStatus (HttpStatus.CREATED)
-    CreateOrderResponse createOrder (@Valid @RequestBody CreateOrderRequest request){
+    @ResponseStatus(HttpStatus.CREATED)
+    CreateOrderResponse createOrder(@Valid @RequestBody CreateOrderRequest request) {
         System.out.println("request " + request);
         String userName = securityService.getLoginUserName();
         log.info("Creating order for user: {}", userName);
@@ -36,17 +35,18 @@ public class OrderController {
     }
 
     @GetMapping
-    List<OrderSummary> getOrders (){
+    List<OrderSummary> getOrders() {
         String userName = securityService.getLoginUserName();
         log.info("Retrieving orders for user: {}", userName);
         return orderService.findOrders(userName);
     }
+
     @GetMapping(value = "/{orderNumber}")
-    OrderDTO getOrder(@PathVariable (value = "orderNumber") String orderNumber){
+    OrderDTO getOrder(@PathVariable(value = "orderNumber") String orderNumber) {
         log.info("Retrieving order by Id: {}", orderNumber);
         String userName = securityService.getLoginUserName();
-        return orderService.findUserOrder(userName, orderNumber).orElseThrow(()-> new OrderNotFoundException(orderNumber));
-
-
-  }
+        return orderService
+                .findUserOrder(userName, orderNumber)
+                .orElseThrow(() -> new OrderNotFoundException(orderNumber));
+    }
 }

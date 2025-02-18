@@ -1,7 +1,7 @@
 package com.zikan.order_service.domain.models;
 
-import java.util.Set;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 public record OrderCreatedEvent(
         String eventId,

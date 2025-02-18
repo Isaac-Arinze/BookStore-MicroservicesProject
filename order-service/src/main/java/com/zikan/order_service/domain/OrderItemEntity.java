@@ -1,8 +1,6 @@
 package com.zikan.order_service.domain;
 
-
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 
 @Entity

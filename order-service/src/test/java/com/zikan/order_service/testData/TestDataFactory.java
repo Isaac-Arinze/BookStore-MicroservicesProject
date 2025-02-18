@@ -1,15 +1,15 @@
 package com.zikan.order_service.testData;
 
+import static org.instancio.Select.field;
+
 import com.zikan.order_service.domain.models.Address;
 import com.zikan.order_service.domain.models.CreateOrderRequest;
 import com.zikan.order_service.domain.models.Customer;
 import com.zikan.order_service.domain.models.OrderItem;
-import org.instancio.Instancio;
-import static org.instancio.Select.field;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
+import org.instancio.Instancio;
 
 public class TestDataFactory {
 

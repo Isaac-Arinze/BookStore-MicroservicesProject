@@ -4,47 +4,45 @@ import com.zikan.order_service.domain.models.Address;
 import com.zikan.order_service.domain.models.Customer;
 import com.zikan.order_service.domain.models.OrderStatus;
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
-@Table (name = "orders")
- class OrderEntity {
+@Table(name = "orders")
+class OrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_id_generator")
     @SequenceGenerator(name = "order_id_generator", sequenceName = "order_id_seq")
     private Long id;
 
-
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String orderNumber;
 
     @Column(name = "username", nullable = false)
     private String username;
 
-    @OneToMany (cascade = CascadeType.ALL, mappedBy = "order")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private Set<OrderItemEntity> items;
 
     @Embedded
     @AttributeOverrides(
             value = {
-                    @AttributeOverride(name = "name", column = @Column(name = "customer_name")),
-                    @AttributeOverride(name = "email", column = @Column(name = "customer_email")),
-                    @AttributeOverride(name = "phone", column = @Column(name = "customer_phone"))
+                @AttributeOverride(name = "name", column = @Column(name = "customer_name")),
+                @AttributeOverride(name = "email", column = @Column(name = "customer_email")),
+                @AttributeOverride(name = "phone", column = @Column(name = "customer_phone"))
             })
     private Customer customer;
 
     @Embedded
     @AttributeOverrides(
             value = {
-                    @AttributeOverride(name = "addressLine1", column = @Column(name = "delivery_address_line1")),
-                    @AttributeOverride(name = "addressLine2", column = @Column(name = "delivery_address_line2")),
-                    @AttributeOverride(name = "city", column = @Column(name = "delivery_address_city")),
-                    @AttributeOverride(name = "state", column = @Column(name = "delivery_address_state")),
-                    @AttributeOverride(name = "zipCode", column = @Column(name = "delivery_address_zip_code")),
-                    @AttributeOverride(name = "country", column = @Column(name = "delivery_address_country")),
+                @AttributeOverride(name = "addressLine1", column = @Column(name = "delivery_address_line1")),
+                @AttributeOverride(name = "addressLine2", column = @Column(name = "delivery_address_line2")),
+                @AttributeOverride(name = "city", column = @Column(name = "delivery_address_city")),
+                @AttributeOverride(name = "state", column = @Column(name = "delivery_address_state")),
+                @AttributeOverride(name = "zipCode", column = @Column(name = "delivery_address_zip_code")),
+                @AttributeOverride(name = "country", column = @Column(name = "delivery_address_country")),
             })
     private Address deliveryAddress;
 
@@ -56,7 +54,7 @@ import java.util.Set;
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @Column (name = "updated_at")
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     public Long getId() {
@@ -139,5 +137,3 @@ import java.util.Set;
         this.updatedAt = updatedAt;
     }
 }
-
-

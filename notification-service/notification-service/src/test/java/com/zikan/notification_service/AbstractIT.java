@@ -1,13 +1,10 @@
 package com.zikan.notification_service;
 
-import org.junit.jupiter.api.Test;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 
+@SpringBootTest(webEnvironment = RANDOM_PORT)
 @Import(TestcontainersConfiguration.class)
-@SpringBootTest
-class NotificationServiceApplicationTests extends AbstractIT {
-
-    @Test
-    void contextLoads() {}
-}
+public abstract class AbstractIT {}

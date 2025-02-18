@@ -24,6 +24,12 @@ select new com.zikan.order_service.domain.models.OrderSummary(o.orderNumber, o.s
 from OrderEntity o
 where o.username = :userName
 """)
-
     List<OrderSummary> findByUserName(String userName);
+
+    @Query("""
+select distinct o
+from OrderEntity o left join fetch o.items
+where o.username = :userName and o.orderNumber = :orderNumber
+""")
+    Optional<OrderEntity> findByUserNameAndOrderNumber(String userName, String orderNumber);
 }

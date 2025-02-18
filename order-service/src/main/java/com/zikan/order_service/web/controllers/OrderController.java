@@ -1,13 +1,12 @@
 package com.zikan.order_service.web.controllers;
 
+import com.zikan.order_service.domain.OrderNotFoundException;
 import com.zikan.order_service.domain.OrderService;
-import com.zikan.order_service.domain.models.CreateOrderRequest;
-import com.zikan.order_service.domain.models.CreateOrderResponse;
-import com.zikan.order_service.domain.models.OrderSummary;
-import com.zikan.order_service.domain.models.SecurityService;
+import com.zikan.order_service.domain.models.*;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,4 +41,12 @@ public class OrderController {
         log.info("Retrieving orders for user: {}", userName);
         return orderService.findOrders(userName);
     }
+    @GetMapping(value = "/{orderNumber}")
+    OrderDTO getOrder(@PathVariable (value = "orderNumber") String orderNumber){
+        log.info("Retrieving order by Id: {}", orderNumber);
+        String userName = securityService.getLoginUserName();
+        return orderService.findUserOrder(userName, orderNumber).orElseThrow(()-> new OrderNotFoundException(orderNumber));
+
+
+  }
 }
